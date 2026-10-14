@@ -90,6 +90,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .arrow:hover { border-color: var(--orange); background: #fff8; }
 .arrow svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 1.6; }
 .arrow:disabled { opacity: .35; cursor: default; }
+.measuring, .measuring * { transition: none !important; }
 .fs { margin-left: 10px; }
 .fs .out { display: none; }
 .is-fs .fs .in { display: none; }
@@ -104,12 +105,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ---------- 2. quem somos ---------- */
 .s-quem .body { --cap: 1640px; position: absolute; left: 72px; right: 72px; top: calc(120px + var(--dy) * .4); bottom: calc(104px + var(--dy) * .4); display: grid; grid-template-columns: 1fr 560px; gap: 84px; align-items: stretch; }
 .s-quem .txt { display: flex; flex-direction: column; justify-content: space-between; padding-top: 16px; min-width: 0; }
-.lead { font-family: var(--display); font-weight: 700; font-size: 42px; line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+.lead { font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
 .lead em { font-style: normal; color: var(--orange); }
 .paras { display: grid; gap: 0; }
-.para { display: grid; grid-template-columns: 64px 1fr; padding: 20px 0 22px; border-top: 1px solid var(--hair); }
+.para { display: grid; grid-template-columns: 64px 1fr; padding: 16px 0 17px; border-top: 1px solid var(--hair); }
 .para .label { font-size: 12px; letter-spacing: .14em; padding-top: 4px; }
-.para p { margin: 0; font-size: 18px; line-height: 1.55; max-width: 60ch; }
+.para p { margin: 0; font-size: 17.5px; line-height: 1.5; max-width: 60ch; }
 .para strong { color: var(--deep); font-weight: 500; }
 .arch-wrap { position: relative; }
 .orbit { position: absolute; left: 50%; top: 280px; border-radius: 50%; border: 1px solid var(--hair); transform: translate(-50%, -50%); }
@@ -350,8 +351,40 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   let cur = 0, lock = false;
   const narrow = () => matchMedia('(max-width: 860px)').matches;
 
+  // Shrinks a team row (it is centred, everything inside scales with its width) until the
+  // tallest hover state of every person ends above the footer. Runs on load, resize and fullscreen.
+  const rows = [...stage.querySelectorAll('.row')];
+  const foot = stage.querySelector('.foot');
+  function fitRows() {
+    if (narrow()) { rows.forEach(r => r.style.removeProperty('--cap')); return; }
+    const k = parseFloat(stage.style.getPropertyValue('--k')) || 1;
+    stage.classList.add('measuring');
+    const kept = [...stage.querySelectorAll('.unit.on')];
+    kept.forEach(u => u.classList.remove('on'));
+    const limit = foot.getBoundingClientRect().top - 22 * k;
+    rows.forEach(row => {
+      row.style.removeProperty('--cap');
+      const units = [...row.querySelectorAll('.unit')];
+      for (let pass = 0; pass < 4; pass++) {
+        let maxB = 0;
+        units.forEach(u => {
+          u.classList.add('on');
+          units.forEach(x => { maxB = Math.max(maxB, x.getBoundingClientRect().bottom); });
+          u.classList.remove('on');
+        });
+        const top = row.getBoundingClientRect().top;
+        if (maxB <= limit) break;
+        const w = row.getBoundingClientRect().width / k;
+        row.style.setProperty('--cap', Math.floor(w * (limit - top) / (maxB - top) * 0.985) + 'px');
+      }
+    });
+    kept.forEach(u => u.classList.add('on'));
+    void stage.offsetHeight;
+    stage.classList.remove('measuring');
+  }
+
   function fit() {
-    if (narrow()) { stage.style.width = stage.style.height = ''; return; }
+    if (narrow()) { stage.style.width = stage.style.height = ''; fitRows(); return; }
     const W = innerWidth, H = innerHeight;
     const k = Math.min(W / 1600, H / 900);
     const sw = W / k, sh = H / k;
@@ -359,6 +392,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
     stage.style.width = sw + 'px';
     stage.style.height = sh + 'px';
     stage.style.setProperty('--dy', ((sh - 900) / 2) + 'px');
+    fitRows();
   }
 
   // fullscreen
@@ -440,6 +474,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   addEventListener('resize', fit);
   fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  addEventListener('load', fit);
   const start = slides.findIndex(s => '#' + s.id === location.hash);
   go(start > 0 ? start : 0, false);
 })();
