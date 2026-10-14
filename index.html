@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Apresentação institucional da Imagenou: quem somos, nosso time e parceiras estratégicas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Imagenou | Apresentação Institucional 2026">
+<meta property="og:description" content="Quem somos, nosso time e parceiras estratégicas.">
+<meta property="og:image" content="https://apresentacao.imagenou.com.br/img/poster.jpg">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="img/logo2026-vertical-positivo.png">
+<title>Imagenou Institucional 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Space+Grotesk:wght@500&family=Syne:wght@500;600;700&display=swap">
+<style>
+/* Layout: a fixed 1600x900 stage (16:9), scaled to fit the window, slides cross-fade inside it; below 860px it becomes a vertical scroll. Single light look, by brand choice. */
+:root {
+  --bg: #F4F1EA;        /* creme Imagenou */
+  --ink: #171410;       /* ink */
+  --orange: #F0822D;    /* laranja Imagenou */
+  --deep: #C25E14;      /* laranja profundo, texto pequeno */
+  --muted: #6B645A;
+  --soft: #A39A8C;
+  --hair: #D9D0C1;
+  --panel: #ECE4D6;
+  --display: "Syne", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Outfit", "Segoe UI", system-ui, sans-serif;
+  --label: "Space Grotesk", "Consolas", ui-monospace, monospace;
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); overflow: hidden; -webkit-font-smoothing: antialiased; }
+img { display: block; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- stage ---------- */
+.viewport { position: fixed; inset: 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.stage { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform: translate(-50%, -50%) scale(var(--k, .5)); transform-origin: 50% 50%; background: var(--bg); }
+
+.label { font-family: var(--label); font-weight: 500; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--deep); }
+.label .b { letter-spacing: .1em; }
+
+.slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .7s var(--ease), visibility 0s linear .7s; }
+.slide.is-active { opacity: 1; visibility: visible; transition: opacity .7s var(--ease); }
+.slide .rv { transition: transform .9s var(--ease), opacity .9s var(--ease); }
+.slide:not(.is-active) .rv { transform: translateY(18px); opacity: 0; }
+.slide.is-active .rv:nth-child(2) { transition-delay: .08s; }
+.slide.is-active .rv:nth-child(3) { transition-delay: .16s; }
+.slide.is-active .rv:nth-child(4) { transition-delay: .24s; }
+.slide.is-active .rv:nth-child(5) { transition-delay: .32s; }
+
+.head { position: absolute; left: 72px; top: 52px; right: 72px; display: flex; justify-content: space-between; align-items: center; height: 24px; }
+.hint { font-family: var(--label); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); margin-right: 210px; display: flex; align-items: center; gap: 10px; }
+.hint::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); animation: pulse 2.4s var(--ease) infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: .45; } }
+.hint .t { display: none; }
+@media (hover: none) { .hint .m { display: none; } .hint .t { display: inline; } }
+
+.wordmark { position: absolute; right: 72px; top: 50px; width: 150px; transition: opacity .5s; z-index: 5; }
+.stage[data-slide="0"] .wordmark, .stage[data-slide="6"] .wordmark { opacity: 0; }
+
+/* ---------- footer navigator ---------- */
+.foot { position: absolute; left: 72px; right: 72px; bottom: 0; height: 84px; border-top: 1px solid var(--hair); display: flex; align-items: center; gap: 30px; z-index: 6; }
+.sec { display: flex; gap: 34px; }
+.sec button, .grp button { font-family: var(--label); font-weight: 500; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--soft); display: flex; align-items: center; gap: 10px; padding: 8px 0; transition: color .3s; }
+.sec button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); transform: scale(0); transition: transform .4s var(--ease); }
+.sec button[aria-current="true"] { color: var(--ink); }
+.sec button[aria-current="true"]::before { transform: scale(1); }
+.sec button:hover, .grp button:hover { color: var(--ink); }
+.grp { display: flex; gap: 26px; margin-left: auto; opacity: 0; pointer-events: none; transition: opacity .5s; }
+.stage[data-team="1"] .grp { opacity: 1; pointer-events: auto; }
+.grp button { font-family: var(--body); font-size: 13px; letter-spacing: 0; text-transform: none; position: relative; }
+.grp button .n { font-family: var(--label); font-size: 11px; color: var(--soft); transition: color .3s; }
+.grp button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+.grp button[aria-current="true"] { color: var(--ink); }
+.grp button[aria-current="true"] .n { color: var(--orange); }
+.grp button[aria-current="true"]::after { transform: scaleX(1); }
+.pager { display: flex; align-items: center; gap: 14px; margin-left: auto; font-family: var(--label); font-size: 12px; letter-spacing: .08em; color: var(--soft); font-variant-numeric: tabular-nums; }
+.stage[data-team="1"] .pager { margin-left: 0; }
+.pager b { color: var(--ink); font-weight: 500; }
+.arrow { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--hair); display: grid; place-items: center; transition: border-color .3s, background .3s; }
+.arrow:hover { border-color: var(--orange); background: #fff8; }
+.arrow svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 1.6; }
+.arrow:disabled { opacity: .35; cursor: default; }
+
+/* ---------- 1. capa ---------- */
+.s-capa video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--bg); }
+.s-capa .head .label:first-child { color: var(--muted); }
+
+/* ---------- 2. quem somos ---------- */
+.s-quem .body { position: absolute; left: 72px; right: 72px; top: 120px; bottom: 104px; display: grid; grid-template-columns: 1fr 560px; gap: 84px; align-items: stretch; }
+.s-quem .txt { display: flex; flex-direction: column; justify-content: space-between; padding-top: 16px; min-width: 0; }
+.lead { font-family: var(--display); font-weight: 700; font-size: 42px; line-height: 1.12; letter-spacing: -.01em; text-wrap: balance; margin: 0; }
+.lead em { font-style: normal; color: var(--orange); }
+.paras { display: grid; gap: 0; }
+.para { display: grid; grid-template-columns: 64px 1fr; padding: 20px 0 22px; border-top: 1px solid var(--hair); }
+.para .label { font-size: 12px; letter-spacing: .14em; padding-top: 4px; }
+.para p { margin: 0; font-size: 18px; line-height: 1.55; max-width: 60ch; }
+.para strong { color: var(--deep); font-weight: 500; }
+.arch-wrap { position: relative; }
+.orbit { position: absolute; left: 50%; top: 280px; border-radius: 50%; border: 1px solid var(--hair); transform: translate(-50%, -50%); }
+.orbit.o1 { width: 640px; height: 640px; animation: spin 46s linear infinite; }
+.orbit.o2 { width: 700px; height: 700px; border-style: dashed; animation: spin 80s linear infinite reverse; }
+.orbit.o1::after { content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50%; background: var(--orange); top: 50%; left: -8px; margin-top: -8px; box-shadow: 0 0 0 6px #F0822D22; }
+.orbit.o2::after { content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--orange); top: -4.5px; left: 50%; }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.arch { position: absolute; inset: 0; border-radius: 280px 280px 14px 14px; overflow: hidden; background: #1d1a17; box-shadow: 0 40px 80px -40px #3a2a1a66; }
+.arch img { width: 100%; height: 100%; object-fit: cover; object-position: 57% 50%; transform: scale(1.04); animation: drift 22s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: scale(1.04) translate(0, 0); } to { transform: scale(1.12) translate(-1.5%, 1%); } }
+.arch .cap { position: absolute; left: 30px; bottom: 26px; color: #EDE5D8; font-family: var(--label); font-size: 11px; letter-spacing: .3em; }
+
+/* ---------- team ---------- */
+.s-team .title { position: absolute; left: 72px; top: 112px; margin: 0; font-family: var(--display); font-weight: 700; font-size: 38px; letter-spacing: -.01em; }
+.s-team .title span { color: var(--hair); font-weight: 500; margin: 0 .35em; }
+.s-team .title em { font-style: normal; color: var(--orange); }
+.row { position: absolute; left: 72px; right: 72px; display: flex; align-items: flex-start; }
+.row.duo { top: 215px; gap: 54px; --up: 1.08; }
+.row.trio { top: 122px; gap: 54px; --up: 1.05; }
+.row.quint { top: 142px; gap: 34px; --up: 1.10; }
+.s-parc .row.duo { top: 230px; }
+.row.duo { --down: calc(2 - var(--up)); }
+.row.trio { --down: calc((3 - var(--up)) / 2); }
+.row.quint { --down: calc((5 - var(--up)) / 4); }
+
+.unit { flex: 1 1 0; min-width: 0; container-type: inline-size; outline-offset: 8px; transition: flex-grow .75s var(--ease); cursor: default; }
+.row:has(.unit:is(:hover, .on)) .unit:not(:hover):not(.on) { flex-grow: var(--down); }
+.unit:is(:hover, .on) { flex-grow: var(--up); }
+.row:has(.unit:is(:hover, .on)) .unit:not(:hover):not(.on) .info { color: #3b352e; }
+
+.pic { position: relative; margin: 0; border-radius: 14px; overflow: hidden; background: var(--panel); aspect-ratio: 3 / 4; transition: box-shadow .6s var(--ease); }
+.pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pic .astro { opacity: 0; transform: scale(1.06); transition: opacity .55s var(--ease), transform .9s var(--ease); }
+.unit:is(:hover, .on) .pic .astro { opacity: 1; transform: scale(1); }
+.unit:is(:hover, .on) .pic { box-shadow: 0 30px 60px -30px #5a3a1a80; }
+
+.info h3 { margin: 0; font-family: var(--display); font-weight: 700; letter-spacing: -.01em; line-height: 1.08; text-wrap: balance; }
+.info .role { margin: 0; font-family: var(--label); font-weight: 500; color: var(--deep); line-height: 1.3; }
+.info .bio { margin: 0; line-height: 1.48; }
+
+/* duo: portrait + text side by side */
+.duo .unit { display: grid; grid-template-columns: 49% 1fr; gap: 5cqi; }
+.duo .info h3 { font-size: 4.9cqi; }
+.duo .info .role { font-size: 2.3cqi; margin-top: 1.1cqi; }
+.duo .info .bio { font-size: 2.7cqi; margin-top: 3cqi; }
+.duo .info { padding-top: .6cqi; }
+/* trio: wide portrait, name right under it, bio below */
+.trio .unit { display: block; }
+.trio .pic { aspect-ratio: 1.3; }
+.trio .pic img { object-position: 50% 24%; }
+.trio .info .nm { margin-top: 4cqi; }
+.trio .info h3 { font-size: 6.3cqi; }
+.trio .info .role { font-size: 3.4cqi; margin-top: 1.4cqi; }
+.trio .info .bio { font-size: 3.9cqi; margin-top: 3.6cqi; }
+/* quint: portrait on top, text below */
+.quint .pic { aspect-ratio: .874; }
+.quint .info h3 { font-size: 8.4cqi; margin-top: 9cqi; }
+.quint .info .role { font-size: 5.3cqi; margin-top: 2cqi; }
+.quint .info .bio { font-size: 6.3cqi; margin-top: 5cqi; line-height: 1.42; }
+
+
+/* ---------- contato ---------- */
+.s-contato .center { position: absolute; inset: 0 0 84px; display: grid; place-items: center; }
+.s-contato .rings { position: absolute; left: 50%; top: 398px; }
+.s-contato .rings .orbit { top: 0; left: 0; }
+.s-contato .r1 { width: 410px !important; height: 410px !important; }
+.s-contato .r2 { width: 590px !important; height: 590px !important; }
+.s-contato .logo { width: 300px; position: relative; margin-top: -20px; }
+.s-contato .contact { position: absolute; left: 0; right: 0; top: 720px; display: flex; justify-content: center; gap: 46px; font-family: var(--label); font-size: 14px; letter-spacing: .26em; color: var(--deep); text-transform: uppercase; }
+.s-contato .contact a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .3s; }
+.s-contato .contact a:hover { border-color: var(--orange); }
+.s-contato .contact span { user-select: all; }
+
+/* ---------- phone / narrow: vertical scroll ---------- */
+@media (max-width: 860px) {
+  body { overflow: auto; }
+  .viewport { position: static; padding-block: 0; }
+  .stage { position: static; width: auto; height: auto; transform: none; }
+  .wordmark, .foot, .hint, .orbit { display: none; }
+  .slide, .slide.is-active { position: relative; opacity: 1; visibility: visible; inset: auto; padding-block: 28px 40px; border-bottom: 1px solid var(--hair); }
+  .slide .rv, .slide:not(.is-active) .rv { transform: none; opacity: 1; }
+  .head { position: static; margin-bottom: 18px; }
+  .s-capa { padding-block: 0 !important; }
+  .s-capa .head { position: absolute; top: 14px; left: 0; right: 0; z-index: 2; }
+  .s-capa video { position: static; height: auto; aspect-ratio: 16 / 9; }
+  .s-quem .body { position: static; display: flex; flex-direction: column; gap: 28px; }
+  .lead { font-size: 28px; }
+  .para p { font-size: 16px; }
+  .arch-wrap { aspect-ratio: 4 / 5; max-width: 420px; width: 100%; margin-inline: auto; }
+  .arch { border-radius: 999px 999px 12px 12px / 50% 50% 12px 12px; }
+  .s-team .title { position: static; font-size: 26px; margin-bottom: 20px; }
+  .row, .row.duo, .row.trio, .row.quint, .s-parc .row.duo { position: static; flex-direction: column; gap: 36px; }
+  .unit, .row .unit:is(:hover, .on), .row:has(.unit:is(:hover, .on)) .unit:not(:hover):not(.on) { flex: none; width: 100%; }
+  .duo .unit, .trio .unit { display: block; }
+  .trio .pic img { object-position: 50% 50%; }
+  .pic, .quint .pic { aspect-ratio: 3 / 4; max-width: 320px; }
+  .info h3, .duo .info h3, .trio .info h3, .quint .info h3 { font-size: 24px; margin: 16px 0 0; }
+  .info .role, .duo .info .role, .trio .info .role, .quint .info .role { font-size: 13px; margin-top: 6px; }
+  .info .bio, .duo .info .bio, .trio .info .bio, .quint .info .bio { font-size: 16px; margin-top: 12px; max-width: 60ch; }
+  .s-contato .center, .s-contato .contact { position: static; }
+  .s-contato .center { padding-block: 30px; }
+  .s-contato .contact { flex-direction: column; align-items: center; gap: 12px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="viewport">
+<main class="stage" id="stage" data-slide="0" data-team="0">
+  <img class="wordmark" src="img/logo2026-wordmark-positivo.png" alt="Imagenou">
+
+  <!-- 1. capa -->
+  <section class="slide s-capa is-active" id="capa" aria-label="Capa">
+    <video src="img/abertura.mp4" poster="img/poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Animação do logo Imagenou"></video>
+    <div class="head"><span class="label">[ Apresentação institucional ]</span><span class="label">Create · Build · Scale</span></div>
+  </section>
+
+  <!-- 2. quem somos -->
+  <section class="slide s-quem" id="quem-somos" aria-label="Quem somos">
+    <div class="head"><span class="label"><span class="b">[ 01 ]</span>&nbsp;&nbsp; Quem somos</span></div>
+    <div class="body">
+      <div class="txt">
+        <p class="lead rv">A Imagenou é um estúdio criativo que encontra na <em>diversidade de conhecimentos</em> uma forma de enxergar novas possibilidades.</p>
+        <div class="paras rv">
+          <div class="para"><span class="label">02</span><p>Nossa atuação é inspirada pelo <strong>nexialismo</strong>, a capacidade de conectar diferentes áreas do conhecimento para compreender desafios e construir soluções que não seriam possíveis a partir de uma única perspectiva.</p></div>
+          <div class="para"><span class="label">03</span><p>Transitamos entre disciplinas, tecnologias e mercados com curiosidade e profundidade, explorando o potencial de cada projeto.</p></div>
+          <div class="para"><span class="label">04</span><p>A inovação faz parte dessa maneira de pensar, questionando o convencional, aproximando diferentes especialidades e transformando conexões em novas possibilidades.</p></div>
+        </div>
+      </div>
+      <div class="arch-wrap rv">
+        <div class="orbit o2"></div><div class="orbit o1"></div>
+        <figure class="arch" style="margin:0"><img src="img/escultura.jpg" alt="Escultura molecular suspensa em luz âmbar: pedra, folha, vidro, metal e uma esfera âmbar conectados por uma rede de fios"><figcaption class="cap">[ NEXIALISMO ]</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. time 01 -->
+  <section class="slide s-team" id="time-1" aria-label="Nosso time, Eduardo e Juliane">
+    <div class="head"><span class="label"><span class="b">[ 02 ]</span>&nbsp;&nbsp; Nosso time</span><span class="hint"><span class="m">Passe o mouse sobre cada pessoa</span><span class="t">Toque em cada pessoa</span></span></div>
+    <div class="row duo"><article class="unit" tabindex="0" aria-label="Eduardo Lion, Fundador e Direção Criativa">
+  <figure class="pic"><img src="img/c_eduardo.jpg" alt="Foto de Eduardo Lion" loading="eager"><img class="astro" src="img/a_eduardo.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Eduardo Lion</h3><p class="role">Fundador e Direção Criativa</p></div><p class="bio">Empreendedor e curioso por natureza, atua há mais de 20 anos explorando as possibilidades do universo digital. Com uma trajetória que transita entre diferentes áreas do conhecimento, gosta de questionar o óbvio, entender como as coisas funcionam e encontrar caminhos pouco convencionais. Na Imagenou, está à frente da visão criativa e dos projetos especiais.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Juliane Goulart, Sócia e Diretora de Operações (COO)">
+  <figure class="pic"><img src="img/c_juliane.jpg" alt="Foto de Juliane Goulart" loading="eager"><img class="astro" src="img/a_juliane.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Juliane Goulart</h3><p class="role">Sócia e Diretora de Operações (COO)</p></div><p class="bio">Executiva com passagem por grandes multinacionais, construiu sua trajetória entre finanças corporativas, relações com investidores e estratégia empresarial. Traz para a Imagenou sua experiência em gestão e uma visão de negócios que vai além da operação, contribuindo para o desenvolvimento de novas oportunidades.</p></div>
+</article></div>
+  </section>
+
+  <!-- 4. time 02 -->
+  <section class="slide s-team" id="time-2" aria-label="Nosso time, Rafael, David e Christiane">
+    <div class="head"><span class="label"><span class="b">[ 02 ]</span>&nbsp;&nbsp; Nosso time</span><span class="hint"><span class="m">Passe o mouse sobre cada pessoa</span><span class="t">Toque em cada pessoa</span></span></div>
+    <div class="row trio"><article class="unit" tabindex="0" aria-label="Rafael Domingues, Criativo e Gestão de Projetos">
+  <figure class="pic"><img src="img/c_rafael.jpg" alt="Foto de Rafael Domingues" loading="eager"><img class="astro" src="img/a_rafael.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Rafael Domingues</h3><p class="role">Criativo e Gestão de Projetos</p></div><p class="bio">Com forte senso de responsabilidade e uma veia criativa marcante, transita entre diferentes disciplinas. Combina sua experiência em gestão de projetos (PMO) com boa leitura de dados e campanhas de marketing digital, conectando criatividade à capacidade de transformar ideias em entregas concretas.</p></div>
+</article><article class="unit" tabindex="0" aria-label="David Machado, Creative Technologist">
+  <figure class="pic"><img src="img/c_david.jpg" alt="Foto de David Machado" loading="eager"><img class="astro" src="img/a_david.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>David Machado</h3><p class="role">Creative Technologist</p></div><p class="bio">Com olhar curioso e forte domínio da lógica computacional, gosta de explorar diferentes linguagens de programação e descobrir novas formas de conectá-las. Transita entre CRM, inteligência artificial e integrações de sistemas, desenvolvendo soluções que ampliam as possibilidades de cada projeto.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Christiane Michelano, Atendimento e Relacionamento">
+  <figure class="pic"><img src="img/c_christiane.jpg" alt="Foto de Christiane Michelano" loading="eager"><img class="astro" src="img/a_christiane.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Christiane Michelano</h3><p class="role">Atendimento e Relacionamento</p></div><p class="bio">Com uma trajetória executiva no Banco Safra, construiu uma sólida experiência em gestão e relacionamento com pessoas. Inquieta por natureza, tem facilidade em criar conexões e transitar entre diferentes perfis e ambientes. Mesmo com uma carreira consolidada, mantém viva a curiosidade pelo comportamento humano, dedicando parte do seu tempo aos estudos de Psicologia.</p></div>
+</article></div>
+  </section>
+
+  <!-- 5. time 03 -->
+  <section class="slide s-team" id="time-3" aria-label="Nosso time, Matheus, João, Carol, Juliana e Melissa">
+    <div class="head"><span class="label"><span class="b">[ 02 ]</span>&nbsp;&nbsp; Nosso time</span><span class="hint"><span class="m">Passe o mouse sobre cada pessoa</span><span class="t">Toque em cada pessoa</span></span></div>
+    <div class="row quint"><article class="unit" tabindex="0" aria-label="Matheus Lopes, Motion Design e Audiovisual">
+  <figure class="pic"><img src="img/c_matheus.jpg" alt="Foto de Matheus Lopes" loading="eager"><img class="astro" src="img/a_matheus.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Matheus Lopes</h3><p class="role">Motion Design e Audiovisual</p></div><p class="bio">Encontra no movimento uma maneira de dar vida às ideias. Explora animações e diferentes linguagens audiovisuais, transformando conceitos em narrativas visuais que comunicam e despertam interesse.</p></div>
+</article><article class="unit" tabindex="0" aria-label="João Rodrigues, UX/UI Designer">
+  <figure class="pic"><img src="img/c_joao.jpg" alt="Foto de João Rodrigues" loading="eager"><img class="astro" src="img/a_joao.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>João Rodrigues</h3><p class="role">UX/UI Designer</p></div><p class="bio">Curioso pela maneira como as pessoas interagem com o universo digital, explora a relação entre comportamento e design. Desenvolve interfaces e experiências que procuram tornar a tecnologia mais intuitiva e próxima das pessoas.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Carol Bizon, Mídia e Performance">
+  <figure class="pic"><img src="img/c_carol.jpg" alt="Foto de Carol Bizon" loading="eager"><img class="astro" src="img/a_carol.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Carol Bizon</h3><p class="role">Mídia e Performance</p></div><p class="bio">Encontra nos dados uma maneira de entender comportamentos e descobrir oportunidades. Atua no universo da mídia digital, explorando estratégias e caminhos para tornar as campanhas mais eficientes e relevantes.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Juliana Andrade, Social Media e Content Creator">
+  <figure class="pic"><img src="img/c_juliana.jpg" alt="Foto de Juliana Andrade" loading="eager"><img class="astro" src="img/a_juliana.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Juliana Andrade</h3><p class="role">Social Media e Content Creator</p></div><p class="bio">Atriz e produtora, traz sua vivência no universo artístico para explorar novas formas de contar histórias. Transita entre diferentes linguagens e formatos, encontrando na criação de conteúdo uma maneira de aproximar marcas e pessoas.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Melissa Baquesqui, Aprendiz">
+  <figure class="pic"><img src="img/c_melissa.jpg" alt="Foto de Melissa Baquesqui" loading="eager"><img class="astro" src="img/a_melissa.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Melissa Baquesqui</h3><p class="role">Aprendiz</p></div><p class="bio">Em seus primeiros passos no universo profissional, encontra na Imagenou um espaço para explorar diferentes conhecimentos. Participa da rotina da equipe, descobrindo novas habilidades e ampliando suas experiências a cada projeto.</p></div>
+</article></div>
+  </section>
+
+  <!-- 6. parceiras -->
+  <section class="slide s-team s-parc" id="parceiras" aria-label="Parceiras Estratégicas, Eventos">
+    <div class="head"><span class="label"><span class="b">[ 03 ]</span>&nbsp;&nbsp; Parceiras estratégicas</span><span class="hint"><span class="m">Passe o mouse sobre cada pessoa</span><span class="t">Toque em cada pessoa</span></span></div>
+    <h2 class="title">Parceiras Estratégicas<span>|</span><em>Eventos</em></h2>
+    <div class="row duo"><article class="unit" tabindex="0" aria-label="Carolina Pastorello, Estratégia e Gestão de Eventos">
+  <figure class="pic"><img src="img/c_carolina.jpg" alt="Foto de Carolina Pastorello" loading="eager"><img class="astro" src="img/a_carolina.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Carolina Pastorello</h3><p class="role">Estratégia e Gestão de Eventos</p></div><p class="bio">Com 20 anos de experiência em suprimentos e negociações, construiu sua trajetória conectando empresas e fornecedores. Traz uma visão estratégica para o universo dos eventos, explorando oportunidades e desenvolvendo parcerias que fazem sentido para cada projeto.</p></div>
+</article><article class="unit" tabindex="0" aria-label="Larissa Cardin, Coordenação e Produção de Eventos">
+  <figure class="pic"><img src="img/c_larissa.jpg" alt="Foto de Larissa Cardin" loading="eager"><img class="astro" src="img/a_larissa.jpg" alt="" aria-hidden="true" loading="lazy"></figure>
+  <div class="info"><div class="nm"><h3>Larissa Cardin</h3><p class="role">Coordenação e Produção de Eventos</p></div><p class="bio">Com 9 anos de experiência em marketing, comunicação e eventos, construiu sua carreira aproximando pessoas e projetos. Transita entre planejamento e produção, encontrando soluções para transformar ideias em experiências bem executadas.</p></div>
+</article></div>
+  </section>
+
+  <!-- 7. contato -->
+  <section class="slide s-contato" id="contato" aria-label="Contato">
+    <div class="center">
+      <div class="rings"><div class="orbit o1 r1"></div><div class="orbit o2 r2"></div></div>
+      <img class="logo" src="img/logo2026-vertical-positivo.png" alt="Imagenou">
+    </div>
+    <div class="contact"><span>ola@imagenou.com.br</span><a href="https://imagenou.com.br" target="_blank" rel="noopener">imagenou.com.br</a></div>
+  </section>
+
+  <nav class="foot" aria-label="Navegação da apresentação">
+    <div class="sec">
+      <button data-go="1" data-sec="quem">Quem somos</button>
+      <button data-go="2" data-sec="time">Nosso time</button>
+      <button data-go="5" data-sec="parc">Parceiras</button>
+      <button data-go="6" data-sec="contato">Contato</button>
+    </div>
+    <div class="grp" aria-label="Páginas do time">
+      <button data-go="2"><span class="n">01</span>Eduardo · Juliane</button>
+      <button data-go="3"><span class="n">02</span>Rafael · David · Chris</button>
+      <button data-go="4"><span class="n">03</span>Matheus · João · Carol · Juliana · Melissa</button>
+    </div>
+    <div class="pager">
+      <span><b id="cur">01</b> / 07</span>
+      <button class="arrow" id="prev" aria-label="Página anterior"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+      <button class="arrow" id="next" aria-label="Próxima página"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+    </div>
+  </nav>
+</main>
+</div>
+
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...stage.querySelectorAll('.slide')];
+  const SEC = ['', 'quem', 'time', 'time', 'time', 'parc', 'contato'];
+  let cur = 0, lock = false;
+  const narrow = () => matchMedia('(max-width: 860px)').matches;
+
+  function fit() {
+    if (narrow()) return;
+    const k = Math.min((innerWidth - 32) / 1600, (innerHeight - 24) / 900);
+    stage.style.setProperty('--k', k);
+  }
+
+  function go(i, push = true) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    if (narrow()) { slides[i].scrollIntoView({ behavior: 'smooth' }); return; }
+    slides.forEach((s, j) => s.classList.toggle('is-active', j === i));
+    stage.querySelectorAll('.unit.on').forEach(u => u.classList.remove('on'));
+    cur = i;
+    stage.dataset.slide = i;
+    stage.dataset.team = (i >= 2 && i <= 4) ? '1' : '0';
+    stage.querySelectorAll('.sec button').forEach(b => b.setAttribute('aria-current', b.dataset.sec === SEC[i]));
+    stage.querySelectorAll('.grp button').forEach(b => b.setAttribute('aria-current', +b.dataset.go === i));
+    document.getElementById('cur').textContent = String(i + 1).padStart(2, '0');
+    document.getElementById('prev').disabled = i === 0;
+    document.getElementById('next').disabled = i === slides.length - 1;
+    if (push) { try { history.replaceState(null, '', '#' + slides[i].id); } catch (e) {} }
+  }
+
+  stage.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(+b.dataset.go)));
+  document.getElementById('prev').addEventListener('click', () => go(cur - 1));
+  document.getElementById('next').addEventListener('click', () => go(cur + 1));
+
+  addEventListener('keydown', e => {
+    if (narrow()) return;
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(slides.length - 1);
+  });
+
+  addEventListener('wheel', e => {
+    if (narrow() || lock || Math.abs(e.deltaY) < 30) return;
+    lock = true; setTimeout(() => lock = false, 900);
+    go(cur + (e.deltaY > 0 ? 1 : -1));
+  }, { passive: true });
+
+  let tx = null;
+  addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', e => {
+    if (tx === null || narrow()) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 60) go(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  // touch and keyboard: toggle the astronaut on a person
+  stage.querySelectorAll('.unit').forEach(u => {
+    const toggle = () => {
+      const on = !u.classList.contains('on');
+      u.parentElement.querySelectorAll('.unit').forEach(x => x.classList.remove('on'));
+      u.classList.toggle('on', on);
+    };
+    u.addEventListener('click', () => { if (matchMedia('(hover: none)').matches) toggle(); });
+    u.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); toggle(); } });
+    u.addEventListener('mouseleave', () => u.classList.remove('on'));
+  });
+
+  addEventListener('resize', fit);
+  fit();
+  const start = slides.findIndex(s => '#' + s.id === location.hash);
+  go(start > 0 ? start : 0, false);
+})();
+</script>
+
+</body>
+</html>
